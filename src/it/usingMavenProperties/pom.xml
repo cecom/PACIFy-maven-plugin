@@ -1,0 +1,41 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>test</groupId>
+    <artifactId>test</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>test</name>
+
+    <properties>
+        <env.name>ChildOfChildEnv</env.name>
+        <SomeChild1Property>SomeChild1PropertyValue</SomeChild1Property>
+        <SomeChild2Property>SomeChild2PropertyValue</SomeChild2Property>
+        <SomeChildOfChildProperty>SomeChildOfChildPropertyValue</SomeChildOfChildProperty>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.geewhiz.pacify</groupId>
+                <artifactId>pacify-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <resolvers>
+                        <resolver>
+                            <strategy>MAVEN_PROPERTIES</strategy>
+                        </resolver>
+                    </resolvers>
+                    <packagePath>src/main/package</packagePath>
+                    <copyTo>target/package</copyTo>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
