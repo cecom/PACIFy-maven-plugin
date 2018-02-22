@@ -35,7 +35,7 @@
     </scm>
 
     <properties>
-        <pacifyVersion>develop</pacifyVersion>
+        <pacifyVersion>1.4.1-dirty</pacifyVersion>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <skipTests>false</skipTests>

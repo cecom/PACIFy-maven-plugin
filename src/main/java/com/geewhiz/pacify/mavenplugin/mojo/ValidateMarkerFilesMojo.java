@@ -19,8 +19,6 @@
  */
 package com.geewhiz.pacify.mavenplugin.mojo;
 
-import java.io.File;
-
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
@@ -44,31 +42,24 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 
-import com.geewhiz.pacify.Replacer;
-import com.geewhiz.pacify.managers.PropertyResolveManager;
+import com.geewhiz.pacify.Validator;
 
 /**
  * 
- * This goal represents the command replace in pacify
+ * This goal represents the command ValidateMarkerFiles in pacify
  *
  */
-@Mojo(name = "replace", defaultPhase = LifecyclePhase.GENERATE_RESOURCES, requiresOnline = false, requiresProject = true, threadSafe = true)
-public class ReplaceMojo extends BasePacifyResolveMojo {
+@Mojo(name = "validateMarkerFiles", defaultPhase = LifecyclePhase.PROCESS_RESOURCES, requiresOnline = false, requiresProject = true, threadSafe = true)
+public class ValidateMarkerFilesMojo extends BasePacifyResolveMojo {
 
-    @Override
-    protected void executePacify() throws MojoExecutionException {
-        checkPackagePath();
+	@Override
+	protected void executePacify() throws MojoExecutionException {
+		checkPackagePath();
 
-        PropertyResolveManager propertyResolveManager = createPropertyResolveManager();
-
-        Replacer replacer = new Replacer(propertyResolveManager);
-
-        if (getCopyTo() != null) {
-            replacer.setCopyDestination(new File(getCopyTo()));
-        }
-
-        replacer.setPackagePath(getPackagePath());
-        replacer.execute();
-    }
+		Validator validator = new Validator();
+		validator.enableMarkerFileChecks();
+		validator.setPackagePath(getPackagePath());
+		validator.execute();
+	}
 
 }

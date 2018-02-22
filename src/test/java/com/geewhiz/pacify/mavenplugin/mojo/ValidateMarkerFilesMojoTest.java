@@ -19,8 +19,6 @@
  */
 package com.geewhiz.pacify.mavenplugin.mojo;
 
-import java.io.File;
-
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
@@ -40,35 +38,25 @@ import java.io.File;
  * under the License.
  */
 
-import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugins.annotations.LifecyclePhase;
-import org.apache.maven.plugins.annotations.Mojo;
+import java.io.File;
 
-import com.geewhiz.pacify.Replacer;
-import com.geewhiz.pacify.managers.PropertyResolveManager;
+import com.geewhiz.pacify.test.TestUtil;
 
-/**
- * 
- * This goal represents the command replace in pacify
- *
- */
-@Mojo(name = "replace", defaultPhase = LifecyclePhase.GENERATE_RESOURCES, requiresOnline = false, requiresProject = true, threadSafe = true)
-public class ReplaceMojo extends BasePacifyResolveMojo {
+public class ValidateMarkerFilesMojoTest extends BaseMojoTest {
 
-    @Override
-    protected void executePacify() throws MojoExecutionException {
-        checkPackagePath();
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		TestUtil.removeOldTestResourcesAndCopyAgain(new File("src/test/resources/validateMarkerFiles"), new File("target/test-resources/validateMarkerFiles"));
+	}
 
-        PropertyResolveManager propertyResolveManager = createPropertyResolveManager();
+	public void testPropertyFileResolver() throws Exception {
+		File pom = getTestFile("target/test-resources/validateMarkerFiles/ValidateMarkerFilesMojo/pom.xml");
+		assertNotNull(pom);
+		assertTrue(pom.exists());
 
-        Replacer replacer = new Replacer(propertyResolveManager);
-
-        if (getCopyTo() != null) {
-            replacer.setCopyDestination(new File(getCopyTo()));
-        }
-
-        replacer.setPackagePath(getPackagePath());
-        replacer.execute();
-    }
+		ValidateMarkerFilesMojo validateMarkerFilesMojo = getMojo(pom, "validateMarkerFiles");
+		validateMarkerFilesMojo.execute();
+	}
 
 }

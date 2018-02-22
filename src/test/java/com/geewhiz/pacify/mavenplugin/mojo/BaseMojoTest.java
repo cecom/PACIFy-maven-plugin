@@ -27,11 +27,11 @@ import com.geewhiz.pacify.mavenplugin.stubs.ProjectStub;
 
 public abstract class BaseMojoTest extends AbstractMojoTestCase {
 
-    public <T extends BaseResolveMojo> T getMojo(File pom, String mojoName) throws Exception {
+    public <T extends BasePacifyResolveMojo> T getMojo(File pom, String mojoName) throws Exception {
         return getMojo(pom, mojoName, new ProjectStub(pom));
     }
 
-    public <T extends BaseResolveMojo> T getMojo(File pom, String mojoName, ProjectStub projectStubToUse) throws Exception {
+    public <T extends BasePacifyResolveMojo> T getMojo(File pom, String mojoName, ProjectStub projectStubToUse) throws Exception {
         @SuppressWarnings("unchecked")
         T replaceMojo = (T) lookupMojo(mojoName, pom);
         assertNotNull(replaceMojo);
