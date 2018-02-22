@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.geewhiz.pacify</groupId>
+    <groupId>de.geewhiz.pacify</groupId>
     <artifactId>pacify-maven-plugin</artifactId>
-    <version>develop</version>
-    <name>com.geewhiz.pacify.pacify-maven-plugin</name>
+    <!-- we cant use jgitver, tests will fail -->
+    <version>1.0.0-alpha</version>
+    <name>de.geewhiz.pacify.pacify-maven-plugin</name>
     <packaging>maven-plugin</packaging>
 
     <licenses>
@@ -35,7 +36,7 @@
     </scm>
 
     <properties>
-        <pacifyVersion>1.4.1-dirty</pacifyVersion>
+        <pacifyVersion>1.4.2-1-12781710</pacifyVersion>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <skipTests>false</skipTests>

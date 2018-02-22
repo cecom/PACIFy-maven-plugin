@@ -10,7 +10,7 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>com.geewhiz.pacify</groupId>
+                <groupId>de.geewhiz.pacify</groupId>
                 <artifactId>pacify-maven-plugin</artifactId>
                 <executions>
                     <execution>

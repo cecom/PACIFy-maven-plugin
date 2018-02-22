@@ -1,8 +1,8 @@
 /*-
  * ========================LICENSE_START=================================
- * com.geewhiz.pacify.pacify-maven-plugin
+ * de.geewhiz.pacify.pacify-maven-plugin
  * %%
- * Copyright (C) 2011 - 2017 gee-whiz.de
+ * Copyright (C) 2011 - 2018 gee-whiz.de
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-package com.geewhiz.pacify.mavenplugin.mojo;
+package de.geewhiz.pacify.mavenplugin.mojo;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
@@ -27,6 +27,9 @@ import static org.hamcrest.Matchers.notNullValue;
 import java.io.File;
 
 import org.junit.Assert;
+
+import de.geewhiz.pacify.mavenplugin.mojo.ReplaceMojo;
+import de.geewhiz.pacify.mavenplugin.mojo.Strategy;
 
 public class StructureMojoTest extends BaseMojoTest {
 

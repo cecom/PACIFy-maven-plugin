@@ -1,8 +1,8 @@
 /*-
  * ========================LICENSE_START=================================
- * com.geewhiz.pacify.pacify-maven-plugin
+ * de.geewhiz.pacify.pacify-maven-plugin
  * %%
- * Copyright (C) 2011 - 2017 gee-whiz.de
+ * Copyright (C) 2011 - 2018 gee-whiz.de
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,15 +17,16 @@
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-package com.geewhiz.pacify.mavenplugin.mojo;
+package de.geewhiz.pacify.mavenplugin.resolver;
 
-/**
- * 
- * Which strategy should be used when resolving parameters
- *
- */
-public enum Strategy {
+import java.util.Map;
 
-    PROPERTY_FILE, MAVEN_PROPERTIES, COMMAND_LINE
+import com.geewhiz.pacify.property.resolver.HashMapPropertyResolver;
+
+public class CommandlineResolver extends HashMapPropertyResolver {
+
+    public CommandlineResolver(Map<String, String> env) {
+        super(env); 
+    }
 
 }

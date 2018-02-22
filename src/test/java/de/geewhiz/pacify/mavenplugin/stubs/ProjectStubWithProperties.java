@@ -1,8 +1,8 @@
 /*-
  * ========================LICENSE_START=================================
- * com.geewhiz.pacify.pacify-maven-plugin
+ * de.geewhiz.pacify.pacify-maven-plugin
  * %%
- * Copyright (C) 2011 - 2017 gee-whiz.de
+ * Copyright (C) 2011 - 2018 gee-whiz.de
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,16 +17,27 @@
  * limitations under the License.
  * =========================LICENSE_END==================================
  */
-package com.geewhiz.pacify.mavenplugin.resolver;
+package de.geewhiz.pacify.mavenplugin.stubs;
 
-import java.util.Map;
+import java.io.File;
+import java.util.Properties;
 
-import com.geewhiz.pacify.property.resolver.HashMapPropertyResolver;
+public class ProjectStubWithProperties extends ProjectStub {
 
-public class CommandlineResolver extends HashMapPropertyResolver {
+	Properties properties;
 
-    public CommandlineResolver(Map<String, String> env) {
-        super(env); 
-    }
+	public ProjectStubWithProperties(File pomToTest, Properties properties) {
+		super(pomToTest);
+		this.properties = properties;
+	}
+
+	public void setProperties(Properties properties) {
+		this.properties = properties;
+	}
+
+	@Override
+	public Properties getProperties() {
+		return properties;
+	}
 
 }
