@@ -44,37 +44,25 @@ import java.util.Properties;
 import com.geewhiz.pacify.mavenplugin.stubs.ProjectStubWithProperties;
 import com.geewhiz.pacify.test.TestUtil;
 
-public class ReplaceMojoTest extends BaseMojoTest {
-
-	public void testPropertyFileResolver() throws Exception {
-		String folderToTest = new String("replace/ReplaceMojo");
-		TestUtil.removeOldTestResourcesAndCopyAgain(new File("src/test/resources", folderToTest), new File("target/test-resources", folderToTest));
-
-		File pom = getTestFile("target/test-resources", folderToTest + "/pom.xml");
-		assertNotNull(pom);
-		assertTrue(pom.exists());
-
-		ReplaceMojo replaceMojo = getMojo(pom, "replace");
-		replaceMojo.execute();
-	}
+public class PreConfigureMojoTest extends BaseMojoTest {
 
 	public void testMavenPropertyResolver() throws Exception {
-		String folderToTest = new String("replace/ReplaceMojo_With_Maven_Properties");
+		String folderToTest = new String("preConfigure/PreConfigureMojo_With_Maven_Properties");
 		TestUtil.removeOldTestResourcesAndCopyAgain(new File("src/test/resources", folderToTest), new File("target/test-resources", folderToTest));
-		
+
 		File pom = getTestFile("target/test-resources", folderToTest + "/pom.xml");
+
 		assertNotNull(pom);
 		assertTrue(pom.exists());
 
-		ReplaceMojo replaceMojo = getMojo(pom, "replace", new ProjectStubWithProperties(pom, createProperties()));
+		PreConfigureMojo preConfigureMojo = getMojo(pom, "preConfigure", new ProjectStubWithProperties(pom, createProperties()));
 
-		replaceMojo.execute();
+		preConfigureMojo.execute();
 	}
 
 	private Properties createProperties() {
 		Properties properties = new Properties();
 
-		properties.put("env.name", "env1");
 		properties.put("SomeChild1Property", "foo1");
 		properties.put("SomeChild2Property", "foo2");
 		properties.put("SomeChildOfChildProperty", "fooBar");

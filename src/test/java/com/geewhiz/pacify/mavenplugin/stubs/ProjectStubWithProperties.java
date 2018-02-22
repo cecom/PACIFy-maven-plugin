@@ -24,20 +24,20 @@ import java.util.Properties;
 
 public class ProjectStubWithProperties extends ProjectStub {
 
-    public ProjectStubWithProperties(File pomToTest) {
-        super(pomToTest);
-    }
+	Properties properties;
 
-    @Override
-    public Properties getProperties() {
-        Properties properties = new Properties();
+	public ProjectStubWithProperties(File pomToTest, Properties properties) {
+		super(pomToTest);
+		this.properties = properties;
+	}
 
-        properties.put("env.name", "env1");
-        properties.put("SomeChild1Property", "foo1");
-        properties.put("SomeChild2Property", "foo2");
-        properties.put("SomeChildOfChildProperty", "fooBar");
+	public void setProperties(Properties properties) {
+		this.properties = properties;
+	}
 
-        return properties;
-    }
+	@Override
+	public Properties getProperties() {
+		return properties;
+	}
 
 }

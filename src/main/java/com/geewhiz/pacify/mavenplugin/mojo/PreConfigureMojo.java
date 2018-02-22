@@ -19,6 +19,8 @@
  */
 package com.geewhiz.pacify.mavenplugin.mojo;
 
+import java.io.File;
+
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
@@ -38,47 +40,35 @@ package com.geewhiz.pacify.mavenplugin.mojo;
  * under the License.
  */
 
-import java.io.File;
-import java.util.Properties;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
 
-import com.geewhiz.pacify.mavenplugin.stubs.ProjectStubWithProperties;
-import com.geewhiz.pacify.test.TestUtil;
+import com.geewhiz.pacify.PreConfigure;
+import com.geewhiz.pacify.managers.PropertyResolveManager;
 
-public class ReplaceMojoTest extends BaseMojoTest {
+/**
+ * 
+ * This goal represents the command preConfigure in pacify
+ *
+ */
+@Mojo(name = "preConfigure", defaultPhase = LifecyclePhase.GENERATE_RESOURCES, requiresOnline = false, requiresProject = true, threadSafe = true)
+public class PreConfigureMojo extends BasePacifyResolveMojo {
 
-	public void testPropertyFileResolver() throws Exception {
-		String folderToTest = new String("replace/ReplaceMojo");
-		TestUtil.removeOldTestResourcesAndCopyAgain(new File("src/test/resources", folderToTest), new File("target/test-resources", folderToTest));
+    @Override
+    protected void executePacify() throws MojoExecutionException {
+        checkPackagePath();
 
-		File pom = getTestFile("target/test-resources", folderToTest + "/pom.xml");
-		assertNotNull(pom);
-		assertTrue(pom.exists());
+        PropertyResolveManager propertyResolveManager = createPropertyResolveManager();
 
-		ReplaceMojo replaceMojo = getMojo(pom, "replace");
-		replaceMojo.execute();
-	}
+		PreConfigure preConfigure = new PreConfigure(propertyResolveManager);
 
-	public void testMavenPropertyResolver() throws Exception {
-		String folderToTest = new String("replace/ReplaceMojo_With_Maven_Properties");
-		TestUtil.removeOldTestResourcesAndCopyAgain(new File("src/test/resources", folderToTest), new File("target/test-resources", folderToTest));
-		
-		File pom = getTestFile("target/test-resources", folderToTest + "/pom.xml");
-		assertNotNull(pom);
-		assertTrue(pom.exists());
+        if (getCopyTo() != null) {
+            preConfigure.setCopyDestination(new File(getCopyTo()));
+        }
 
-		ReplaceMojo replaceMojo = getMojo(pom, "replace", new ProjectStubWithProperties(pom, createProperties()));
+        preConfigure.setPackagePath(getPackagePath());
+        preConfigure.execute();
+    }
 
-		replaceMojo.execute();
-	}
-
-	private Properties createProperties() {
-		Properties properties = new Properties();
-
-		properties.put("env.name", "env1");
-		properties.put("SomeChild1Property", "foo1");
-		properties.put("SomeChild2Property", "foo2");
-		properties.put("SomeChildOfChildProperty", "fooBar");
-
-		return properties;
-	}
 }
