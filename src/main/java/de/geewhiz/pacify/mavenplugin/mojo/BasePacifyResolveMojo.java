@@ -80,7 +80,11 @@ public abstract class BasePacifyResolveMojo extends BasePacifyMojo {
 			throw new MojoExecutionException("You didn't define the propertyFile... Aborting!");
 		}
 
-		File propertyFile = new File(project.getBasedir(), propertyFileParameter);
+		File propertyFile = new File(propertyFileParameter);
+		if(!propertyFile.isAbsolute()){
+			propertyFile = new File(project.getBasedir(), propertyFileParameter);
+		}
+				
 		if (propertyFile.exists() && propertyFile.isFile()) {
 			try {
 				return propertyFile.toURI().toURL();
