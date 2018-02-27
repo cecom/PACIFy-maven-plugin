@@ -12,6 +12,7 @@
             <plugin>
                 <groupId>de.geewhiz.pacify</groupId>
                 <artifactId>pacify-maven-plugin</artifactId>
+                <version>@project.version@</version>
                 <executions>
                     <execution>
                         <goals>
