@@ -7,10 +7,6 @@
     <packaging>jar</packaging>
     <name>test</name>
 
-    <properties>
-        <!-- properties are used from de.geewhiz.pacify.mavenplugin.stubs.ProjectStubWithProperties -->
-    </properties>
-
     <build>
         <plugins>
             <plugin>
@@ -19,13 +15,12 @@
                 <executions>
                     <execution>
                         <goals>
-                            <goal>replace</goal>
+                            <goal>validateMarkerFiles</goal>
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
-                    <packagePath>replace</packagePath>
-
+                    <packagePath>src/main/package</packagePath>
                 </configuration>
             </plugin>
         </plugins>

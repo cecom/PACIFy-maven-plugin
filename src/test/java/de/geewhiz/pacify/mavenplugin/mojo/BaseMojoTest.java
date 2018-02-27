@@ -20,25 +20,33 @@
 package de.geewhiz.pacify.mavenplugin.mojo;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.util.Properties;
 
 import org.apache.maven.plugin.testing.AbstractMojoTestCase;
+import org.codehaus.plexus.configuration.PlexusConfiguration;
 
-import de.geewhiz.pacify.mavenplugin.mojo.BasePacifyResolveMojo;
 import de.geewhiz.pacify.mavenplugin.stubs.ProjectStub;
 
 public abstract class BaseMojoTest extends AbstractMojoTestCase {
 
-    public <T extends BasePacifyResolveMojo> T getMojo(File pom, String mojoName) throws Exception {
-        return getMojo(pom, mojoName, new ProjectStub(pom));
-    }
+	public <T extends BasePacifyResolveMojo> T getMojo(File pom, String mojoName) throws Exception {
+		return getMojo(pom, mojoName, new ProjectStub(pom));
+	}
 
-    public <T extends BasePacifyResolveMojo> T getMojo(File pom, String mojoName, ProjectStub projectStubToUse) throws Exception {
-        @SuppressWarnings("unchecked")
-        T replaceMojo = (T) lookupMojo(mojoName, pom);
-        assertNotNull(replaceMojo);
+	public <T extends BasePacifyResolveMojo> T getMojo(File pom, String mojoName, ProjectStub projectStubToUse) throws Exception {
+		Properties properties = new Properties();
+		properties.load(new FileInputStream("target/test-classes/test.properties"));
+		
+		PlexusConfiguration pluginConfiguration = extractPluginConfiguration( properties.getProperty("artifact_id"), pom );
 
-        setVariableValueToObject(replaceMojo, "project", projectStubToUse);
+		@SuppressWarnings("unchecked")
+		T replaceMojo = (T) lookupMojo(properties.getProperty("group_id"), properties.getProperty("artifact_id"), properties.getProperty("version"), mojoName, pluginConfiguration);
 
-        return replaceMojo;
-    }
+		assertNotNull(replaceMojo);
+
+		setVariableValueToObject(replaceMojo, "project", projectStubToUse);
+
+		return replaceMojo;
+	}
 }
