@@ -4,7 +4,7 @@
     <groupId>de.geewhiz.pacify</groupId>
     <artifactId>pacify-maven-plugin</artifactId>
     <!-- we cant use jgitver, tests will fail -->
-    <version>1.0.0-alpha</version>
+    <version>1.0.0-alpha2</version>
     <name>de.geewhiz.pacify.pacify-maven-plugin</name>
     <packaging>maven-plugin</packaging>
 
