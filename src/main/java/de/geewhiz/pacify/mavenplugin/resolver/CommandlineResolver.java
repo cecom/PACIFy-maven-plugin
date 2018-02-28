@@ -20,13 +20,18 @@
 package de.geewhiz.pacify.mavenplugin.resolver;
 
 import java.util.Map;
+import java.util.Properties;
 
 import com.geewhiz.pacify.property.resolver.HashMapPropertyResolver;
 
 public class CommandlineResolver extends HashMapPropertyResolver {
 
-    public CommandlineResolver(Map<String, String> env) {
-        super(env); 
-    }
+	public CommandlineResolver(Map<String, String> env) {
+		super(env);
+	}
+
+	public CommandlineResolver(Properties properties) {
+		super(com.google.common.collect.Maps.fromProperties(properties));
+	}
 
 }

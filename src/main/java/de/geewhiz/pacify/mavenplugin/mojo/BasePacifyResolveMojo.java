@@ -126,7 +126,7 @@ public abstract class BasePacifyResolveMojo extends BasePacifyMojo {
 			}
 			break;
 		case COMMAND_LINE:
-			propertyResolver = new CommandlineResolver(System.getenv());
+			propertyResolver = new CommandlineResolver(System.getProperties());
 			if (resolver.getBeginToken() != null) {
 				((CommandlineResolver) propertyResolver).setBeginToken(resolver.getBeginToken());
 			}

@@ -148,9 +148,6 @@
                     <localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath>
                     <settingsFile>src/it/settings.xml</settingsFile>
                     <!-- <mavenOpts>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000</mavenOpts> -->
-                    <environmentVariables>
-                        <aCommandLineParameter>commandlineValue</aCommandLineParameter>
-                    </environmentVariables>
                     <properties>
                         <jgitver.skip>true</jgitver.skip>
                     </properties>
