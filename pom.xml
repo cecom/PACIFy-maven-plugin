@@ -24,7 +24,7 @@
     <developers>
         <developer>
             <name>Sven Oppermann</name>
-            <email>sven.oppermann@gmail.com</email>
+            <email>sven.oppermann@gee-whiz.de</email>
             <roles>
                 <role>Lead Developer</role>
             </roles>
@@ -37,15 +37,31 @@
     </scm>
 
     <properties>
-        <pacifyVersion>1.4.2</pacifyVersion>
+        <pacifyVersion>1.4.4-c7ee64fc</pacifyVersion>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <skipTests>false</skipTests>
+
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
 
         <aetherVersion>1.1.0</aetherVersion>
         <mavenVersion>3.3.9</mavenVersion>
         <junitVersion>4.12</junitVersion>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>java-8-api</id>
+            <activation>
+                <jdk>[9,)</jdk>
+            </activation>
+            <properties>
+                <maven.compiler.release>8</maven.compiler.release>
+            </properties>
+        </profile>
+    </profiles>
+
     <build>
         <testResources>
             <!-- for jgitver -->
@@ -74,6 +90,11 @@
                     <source>1.7</source>
                     <target>1.7</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-plugin-plugin</artifactId>
+                <version>3.6.1</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
