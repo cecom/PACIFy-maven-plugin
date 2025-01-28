@@ -48,7 +48,7 @@
     </distributionManagement>
 
     <properties>
-        <pacifyVersion>1.4.4-c7ee64fc</pacifyVersion>
+        <pacifyVersion>1.4.5</pacifyVersion>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <skipTests>false</skipTests>
